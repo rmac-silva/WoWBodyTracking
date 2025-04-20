@@ -6,8 +6,8 @@ This is a simple python script that allows players to:
 - A separate voice module where users can configure certain keywords associated with spoken words [sound_commands.cfg]
 
 # Common Issues
-If you have overlap, either make the poses more distinct or make their thresholds lower. Ultimately you can try and ignore certain body parts, which will lead to smaller scores and hopefully more accurate pose estimation.
-If poses are triggering while you're raising your hands, make the pose hold time bigger, even though it will introduce a delay it will prevent misfires (this happens often when raising your arms for mouse movement)
+If you have overlap, either make the poses more distinct or make their thresholds lower. Ultimately you can try and ignore certain body parts, which will lead to smaller scores and hopefully more accurate pose estimation.\n
+If poses are triggering while you're raising your hands, make the pose hold time bigger, even though it will introduce a delay it will prevent misfires (this happens often when raising your arms for mouse movement)\n
 
 ## Motion Capture
 The WoW With Movement module requires a webcam that supports a USB 3.0 Connection [Blue USBs] needed to run MediaPipe's pose processing
