@@ -82,6 +82,7 @@ def save_pose_to_json(landmarks : List[landmark_pb2.NormalizedLandmark], index :
         "name" : f"NaN {index}",
         "keycode" : "NaN",
         "threshold" : 0.15,
+        "key_press_interval" : 1,
         "ignored_body_parts" : [],
         "data" : []
     }
