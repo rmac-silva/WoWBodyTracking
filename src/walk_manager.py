@@ -22,17 +22,19 @@ class WalkManager():
         self.poses["Standing"] = rested_pose
         
     
+        
+    
     def process_walking(self, left_ankle_y, right_ankle_y):
         self.check_for_walking(left_ankle_y, right_ankle_y)
 
         if(self.walking and not self.pressed_down):
             print("Starting to walk...")
-            pyautogui.keyDown("w",_pause = False)
+            pyautogui.keyDown(self.walking_key,_pause = False)
             self.pressed_down = True
         elif(not self.walking and self.pressed_down):
             print("Stopping...")
             self.pressed_down = False
-            pyautogui.keyUp("w",_pause = False)
+            pyautogui.keyUp(self.walking_key,_pause = False)
     
     def check_for_walking(self, left_ankle_y, right_ankle_y):
         if(right_ankle_y <= self.WALKING_Y_THRESHOLD or left_ankle_y <= self.WALKING_Y_THRESHOLD):

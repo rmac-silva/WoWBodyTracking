@@ -41,6 +41,7 @@ class MediaPipe():
         
         #Pose Manager - Settings
         self.pose_hold_time = 2
+        self.save_pose_keybind=""
         
         #Speech module
         self.speech_module = sm
@@ -162,6 +163,12 @@ class MediaPipe():
                 self.last_call_time = time.time()
                     
             self.draw_overlay(image)
+        else:
+            if(self.walking_manager.pressed_down):
+                print("No user detected, stopping movement")
+                self.walking_manager.walking = False
+                self.walking_manager.pressed_down = False
+                pyautogui.keyUp("w",_pause = False)
             
         return image
 
@@ -222,8 +229,6 @@ class MediaPipe():
             right_ankle = joint_positions[28]
             left_ankle = joint_positions[27]
             self.index += 1
-            if self.index % 20 == 0:
-                print(f"L:{left_ankle.y} | R:{right_ankle.y}")
                 
             self.walking_manager.process_walking(left_ankle.y,right_ankle.y)
         else:
@@ -234,7 +239,11 @@ class MediaPipe():
         
         if input == ord('s') and self.result.pose_landmarks:
             self.save_new_pose()
-            
+        
+        if input == ord(self.save_pose_keybind) and self.result.pose_landmarks:
+            print("New pose saved!")
+            self.save_new_pose()
+        
         if input == ord('h') and self.result.pose_landmarks:
             self.speech_module.toggle()
 
@@ -255,14 +264,19 @@ class MediaPipe():
         match(text):
             
             case "pause" | "pause program":
+                print("Pausing...")
                 self.paused = True
             case "resume" | "unpause":
+                print("Resuming...")
                 self.paused = False
             case "save pose" | "save command" | "safe pose":
+                print("New pose saved!")
                 self.save_new_pose()
             case "exit" | "quit" | "stop":
+                print("Quitting!")
                 self.running = False
             case "stop listening" | "quiet" | "silence":
+                print("Disabling voice module...")
                 self.speech_module.enabled = False
             case _:
                 print("Invalid command")

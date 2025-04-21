@@ -71,7 +71,20 @@ class Pose:
             current_time = time.time()
             time_delta = current_time - self.last_key_press_time
             if(time_delta >= self.key_press_interval):
-                pyautogui.press(self.keycode,presses=1,_pause=False)  # Simulate key press and release
+                
+                keys = self.keycode.split("+")
+                if(len(keys) == 1):
+                    print(f"Pressing {keys[0]}")
+                    pyautogui.press(keys[0],presses=1,_pause=False)
+                elif(len(keys) == 2):
+                    print(f"Pressing {keys[0]}+{keys[1]}")
+                    pyautogui.hotkey(keys[0],keys[1])
+                elif(len(keys) == 3):
+                    pyautogui.hotkey(keys[0],keys[1],keys[2])
+                    print(f"Pressing {keys[0]}+{keys[1]}+{keys[2]}")
+                else:
+                    print(f"Invalid number of keybinds: {keys} max is 3 shift+ctrl+1")
+                
                 self.last_key_press_time = time.time()
         except ValueError:
             if(debug):print(f"Error emulating key {self.keycode} for pose {self.name}")

@@ -11,7 +11,7 @@ os.makedirs("saved_poses", exist_ok=True)
 def load_saved_settings():
     #Pose settings
     mp.pose_hold_time = float(s.pose_hold_time)
-    
+    mp.save_pose_keybind = str(s.pose_save_keybind)
     #Mouse settings
     hand_tracker.sensitivity = float(s.sensitivity)
     hand_tracker.y_locked = s.y_locked
@@ -27,6 +27,7 @@ def create_sample_settings():
     config_text = """
 #Pose Settings
 pose_hold_time : .5 # How long the pose has to be held to trigger the keystroke. Low values lead to a lot of misfires
+pose_save_keybind : "." #Keybind to save a pose instead of using voice commands
 
 #Mouse settings
 sensitivity : 450 #Mouse sens
@@ -56,6 +57,7 @@ finally:
     mp = MediaPipe(pose_manager,speech_recognizer,hand_tracker,walk_manager)
     load_saved_settings()
     mp.run()
+    input("Press any key to close...")
     
 
 

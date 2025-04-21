@@ -32,7 +32,7 @@ class HandTracker():
         self.mirrored = 1 #-1 if True, 1 if False
         
     def start_hand_tracking(self, start_pos_r, start_pos_l):
-        print(f"\nStarting tracking...\n R:{start_pos_r} | L:{start_pos_l}")
+        print("\nStarting tracking...\n")
         self.enabled = True
         self.start_hand_r = start_pos_r
         self.start_hand_l = start_pos_l

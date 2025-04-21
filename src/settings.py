@@ -3,7 +3,7 @@ class Settings():
     def __init__(self):
         #Pose Settings
         self.pose_hold_time = 2 # How long the pose has to be held to trigger the keystroke
-        self.pose_keypress_delay = 1 #How long between key presses
+        self.pose_save_keybind = "." #Keybind for saving a pose
 
         #Mouse settings
         self.sensitivity = 450 #Mouse sens
@@ -32,5 +32,6 @@ class Settings():
                 print(f"Line: {setting_name} : {setting_value}")
                 setattr(self,setting_name,setting_value)
 
-
+        self.pose_save_keybind = self.pose_save_keybind.replace("\"","").strip()
+        self.walking_key = self.walking_key.replace("\"","").strip()
     

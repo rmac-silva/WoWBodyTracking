@@ -101,24 +101,32 @@ class SpeechManager():
     def interpret_command(self,text):
         print(f"Processing command: {text}")
         for entry in self.commands:
-            if(text == entry[0]): #Text matches command
+            # print(f"{text.strip()} == {entry[0].strip()}")
+            if(text.strip() == entry[0].strip()): #Text matches command
+                # print(f"Text matched!")
                 try:
                     if(entry[1] == "exit"):
+                        print("Quitting...")
                         self.running = False
                     elif(entry[1] == "walk"):
+                        print("Walking...")
                         pyautogui.keyDown("w",_pause = False)
                     elif(entry[1] == "stop"):
+                        print("Stopping...")
                         pyautogui.keyUp("w",_pause = False)
                     else:
                         keys = entry[1].split("+")
                         if(len(keys) == 1):
+                            print(f"Pressing {keys[0]}")
                             pyautogui.press(keys[0])
                         elif(len(keys) == 2):
+                            print(f"Pressing {keys[0]}+{keys[1]}")
                             pyautogui.hotkey(keys[0],keys[1])
                         elif(len(keys) == 3):
                             pyautogui.hotkey(keys[0],keys[1],keys[2])
+                            print(f"Pressing {keys[0]}+{keys[1]}+{keys[2]}")
                         else:
-                            print(f"Invalid number of keybinds: {keys}")
+                            print(f"Invalid number of keybinds: {keys} max is 3 shift+ctrl+1")
                             
                         
                         
